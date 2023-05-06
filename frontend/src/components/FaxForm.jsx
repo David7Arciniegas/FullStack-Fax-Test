@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./FaxForm.css";
 import { Button, Container, TextField, Typography } from "@mui/material";
+import svg from "../assets/blob.svg";
 
 const FaxForm = () => {
   const [faxNumber, setFaxNumber] = useState(""); // State variable for fax number input
@@ -52,14 +53,25 @@ const FaxForm = () => {
   };
 
   return (
+    <>
+
+<div className="header-container">
+  <h1>Welcome</h1>
+  <h5>Here you can send your PDF file to our Fax system</h5>
+  
+</div>
+
     <div className="main-container">
+      <div className="vector-1"> <img src={svg} alt="Your SVG" /></div>
+
+    
       <Container maxWidth="sm" className="form-container">
         <Typography variant="h4" gutterBottom className="form-title">
-          Fax Form
+         <h4 className="main-container-subtitle">Fax Form</h4> 
         </Typography>
         <form onSubmit={handleSubmit} className="fax-form">
           <TextField
-            label="Número de fax"
+            label="Fax Number"
             value={faxNumber}
             onChange={(event) => setFaxNumber(event.target.value)}
             fullWidth
@@ -81,12 +93,12 @@ const FaxForm = () => {
               component="span"
               className="pdf-file-button"
             >
-              Subir Archivo .PDF
+               Upload PDF file
             </Button>
           </label>
           {pdfFile && (
             <Typography variant="subtitle1" className="pdf-file-selected">
-              Archivo PDF seleccionado
+              PDF File Selected
             </Typography>
           )}
           <Button
@@ -96,11 +108,12 @@ const FaxForm = () => {
             fullWidth
             className="submit-button"
           >
-            Enviar
+            Send
           </Button>
         </form>
       </Container>
     </div>
+    </>
   );
 };
 

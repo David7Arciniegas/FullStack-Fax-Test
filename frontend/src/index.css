@@ -8,7 +8,7 @@
   background: rgb(11,9,40);
   background: rgb(11,9,40);
   background: rgb(11,9,40);
-background: linear-gradient(90deg, rgba(11,9,40,1) 4%, rgba(85,158,180,1) 35%, rgba(55,96,108,1) 80%, rgba(31,48,75,1) 99%);
+background: linear-gradient(90deg, rgb(18, 9, 40) 4%, rgba(85,158,180,1) 35%, rgba(55,96,108,1) 80%, rgb(34, 23, 82) 99%);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

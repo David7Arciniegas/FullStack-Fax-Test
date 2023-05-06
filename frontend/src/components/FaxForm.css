@@ -1,26 +1,47 @@
-
-
-.main-container {
-  background-color: #9191cc;
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  
 }
 
-.form-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 50px;
+.header-container{
+ font-size: larger;
+ color: rgb(255, 255, 255);
+
 }
 
-.form-title {
-  color: white;
-  margin-bottom: 50px;
-}
-
-.fax-form {
+.vector-1{
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
-.fax-number-input {
-  margin: bottom 1rem;
-
+.main-container-subtitle{
+  text-shadow: 2px;
+  color: #fbf5f5;
+ }
+ 
+.card {
+  padding: 2em;
 }
+
+.read-the-docs {
+  color: #141111;
+}
+
+.container {
+  position: relative;
+  overflow: hidden;
+}
+
+.button {
+  position: relative;
+  overflow: hidden;
+}
+
