@@ -32,7 +32,7 @@ resource "aws_iam_role" "lambda_execution_role" {
   })
   lifecycle {
     create_before_destroy = true 
-    ignore_updates = [assume_role_policy]
+    ignore_changes = [assume_role_policy]
 }
 }
 
@@ -54,7 +54,7 @@ resource "aws_iam_role" "api_gateway_execution_role" {
   })  
   lifecycle {
     create_before_destroy = true 
-    ignore_updates = [assume_role_policy]
+    ignore_changes = [assume_role_policy]
 }
 }  
 # Create an IAM role for the api gateway to invoke a lambda
@@ -76,7 +76,7 @@ resource "aws_iam_role_policy" "api_gateway_lambda_invoke" {
   })  
    lifecycle {
     create_before_destroy = true 
-    ignore_updates = [policy]
+    ignore_changes = [policy]
 }
 }  
 
