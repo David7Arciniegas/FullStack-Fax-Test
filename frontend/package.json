@@ -15,6 +15,7 @@
     "@mui/material": "^5.12.3",
     "axios": "^1.4.0",
     "react": "^18.2.0",
+    "pdfjs-dist": "^2.16.105",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
