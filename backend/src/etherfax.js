@@ -7,7 +7,8 @@ class Etherfax {
   // The constructor method is called when a new instance of the class is created
   constructor() {
     // Set the base URL for the Etherfax API
-    this.baseURL = 'https://na.connect.etherfax.net/rest/3.0/api';
+    this.baseURL = process.env.API_URL;
+    this.apiKey = process.env.API_KEY;
   }
 
   // The sendFax method sends a fax using the Etherfax API
@@ -25,8 +26,8 @@ class Etherfax {
     const response = await axios.post(`${this.baseURL}/outbox`, params, {
       // Set the headers for the request
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Bearer ' + 'wl1ZZ7Ahw0wuAkM/5qy0Dt1oXbUk96JqV59KwBwXH8g=', // Replace with actual auth token
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.apiKey}` // Replace with actual auth token
       },
     });
 
