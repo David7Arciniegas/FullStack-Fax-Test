@@ -38,7 +38,7 @@ const FaxForm = () => {
     event.preventDefault();
     if (!pdfFile || !faxNumber) {
       // If either fax number or PDF file is missing
-      alert("Por favor, complete todos los campos."); // Alert user to fill out all fields
+      alert("Please complete all the fileds."); // Alert user to fill out all fields
       return;
     }
 
@@ -59,7 +59,7 @@ const FaxForm = () => {
     } catch (error) {
       console.error(error);
       alert(
-        "Ocurrió un error al enviar el fax. Por favor, inténtelo de nuevo."
+        "An error occured, please try again"
       ); // Alert user that an error occurred
     }
   };
