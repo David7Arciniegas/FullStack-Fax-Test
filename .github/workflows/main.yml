@@ -43,13 +43,6 @@ jobs:
     - name: Upload axios_lambda.zip to S3  
       run: aws s3 cp backend/axios_lambda.zip s3://${{ secrets.BUCKET }}/axios_lambda.zip  
   
-    - name: Install Terraform  
-      run: |  
-        wget https://releases.hashicorp.com/terraform/1.0.11/terraform_1.0.11_linux_amd64.zip  
-        sudo unzip -o terraform_1.0.11_linux_amd64.zip  
-        sudo mv terraform /usr/local/bin/  
-        terraform -version  
-  
     - name: Deploy with Terraform  
       run: |  
         cd terraform  
