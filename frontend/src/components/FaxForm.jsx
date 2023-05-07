@@ -1,11 +1,15 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "./FaxForm.css";
 import { Button, Container, TextField, Typography } from "@mui/material";
 import svg from "../assets/blob.svg";
-
+import * as pdfjs from 'pdfjs-dist';
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 const FaxForm = () => {
   const [faxNumber, setFaxNumber] = useState(""); // State variable for fax number input
   const [pdfFile, setPdfFile] = useState(null); // State variable for selected PDF file
+  const [numPages, setNumPages] = useState("0"); // State variable for counted pages in PDF
+  
 
   const handleFileChange = (event) => {
     // Function to handle file input change
@@ -13,12 +17,19 @@ const FaxForm = () => {
     if (file) {
       // If file selected
       const reader = new FileReader();
-      reader.onload = (e) => {
-        setPdfFile(e.target.result.split(",")[1]); // Set PDF file to base64 encoded string
+      reader.onload = async (e) => {
+        const pdfData = e.target.result;
+        setPdfFile(pdfData.split(",")[1]); // Set PDF file to base64 encoded string
+        // Count pages in the PDF  
+        const loadingTask = pdfjs.getDocument(pdfData); 
+        const pdfDocument = await loadingTask.promise;  
+        const pageCount = pdfDocument.numPages.toString();  
+        setNumPages(pageCount);  
       };
       reader.readAsDataURL(file);
     } else {
       setPdfFile(null); // If no file selected, set PDF file to null
+      setNumPages("0"); // If no file selected, set number of pages to 0
     }
   };
 
@@ -35,6 +46,7 @@ const FaxForm = () => {
       // Create request body with fax number and PDF file
       pdfFile: pdfFile,
       faxNumber: faxNumber,
+      TotalPages:numPages
     };
 
     try {
