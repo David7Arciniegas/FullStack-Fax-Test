@@ -6,7 +6,7 @@ variable "AWS_ACCESS_KEY" {}
 variable "AWS_SECRET_KEY" {}
 variable "REGION" {}
 variable "STAGE" {}
-
+variable "BUCKET" {}
 # Set provider
 provider "aws" {
   region = "${var.REGION}"
@@ -93,7 +93,7 @@ resource "aws_lambda_function" "my_lambda_function" {
 
 resource "aws_lambda_layer_version" "my_layer" {  
   layer_name = "axios"  
-  s3_bucket  = "s3-titans-test"
+  s3_bucket  = "${var.BUCKET}"
   s3_key     = "axios_lambda.zip"
   compatible_runtimes = ["nodejs14.x"]  
 }  
