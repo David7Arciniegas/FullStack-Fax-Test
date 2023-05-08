@@ -34,7 +34,7 @@ resource "aws_iam_role" "lambda_execution_role" {
 
 # Create an IAM role for the api gateway execution
 resource "aws_iam_role" "api_gateway_execution_role" {  
-  name = "api_gateway_execution_role"  
+  name = "api_gateway_execution_role_2"  
   
   assume_role_policy = jsonencode({  
     Version = "2012-10-17"  
@@ -49,6 +49,7 @@ resource "aws_iam_role" "api_gateway_execution_role" {
     ]  
   })  
 }  
+
 # Create an IAM role for the api gateway to invoke a lambda
 resource "aws_iam_role_policy" "api_gateway_lambda_invoke" {  
   name = "api_gateway_lambda_invoke"  
