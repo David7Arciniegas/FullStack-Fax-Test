@@ -6,7 +6,7 @@ variable "AWS_ACCESS_KEY" {}
 variable "AWS_SECRET_KEY" {}
 variable "REGION" {}
 variable "STAGE" {}
-variable "BUCKET" {}
+
 # Set provider
 provider "aws" {
   region = "${var.REGION}"
@@ -17,7 +17,7 @@ provider "aws" {
 # Create an IAM role for the Lambda function to assume
 
 resource "aws_iam_role" "lambda_execution_role" {
-  name = "lambda_execution_role_2"
+  name = "lambda_execution_role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -30,15 +30,11 @@ resource "aws_iam_role" "lambda_execution_role" {
       }
     ]
   })
-  lifecycle {
-    create_before_destroy = true 
-    ignore_changes = [assume_role_policy]
-}
 }
 
 # Create an IAM role for the api gateway execution
 resource "aws_iam_role" "api_gateway_execution_role" {  
-  name = "api_gateway_execution_role_2"  
+  name = "api_gateway_execution_role"  
   
   assume_role_policy = jsonencode({  
     Version = "2012-10-17"  
@@ -52,12 +48,7 @@ resource "aws_iam_role" "api_gateway_execution_role" {
       }  
     ]  
   })  
-  lifecycle {
-    create_before_destroy = true 
-    ignore_changes = [assume_role_policy]
-}
 }  
-
 # Create an IAM role for the api gateway to invoke a lambda
 resource "aws_iam_role_policy" "api_gateway_lambda_invoke" {  
   name = "api_gateway_lambda_invoke"  
@@ -75,10 +66,6 @@ resource "aws_iam_role_policy" "api_gateway_lambda_invoke" {
       }  
     ]  
   })  
-   lifecycle {
-    create_before_destroy = true 
-    ignore_changes = [policy]
-}
 }  
 
 # Create a Lambda function
@@ -106,7 +93,7 @@ resource "aws_lambda_function" "my_lambda_function" {
 
 resource "aws_lambda_layer_version" "my_layer" {  
   layer_name = "axios"  
-  s3_bucket  = "${var.BUCKET}"
+  s3_bucket  = "s3-titans-test"
   s3_key     = "axios_lambda.zip"
   compatible_runtimes = ["nodejs14.x"]  
 }  
