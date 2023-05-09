@@ -35,6 +35,9 @@ resource "aws_lambda_function" "my_lambda_function" {
       API_URL = "${var.API_URL}"
     } 
   }
+  lifecycle {
+    ignore_changes = [arn, last_modified_time]
+}
 }
 
 # Create Layer for lambda function that allows axios
