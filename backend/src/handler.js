@@ -6,7 +6,7 @@ const etherfax = new Etherfax();
 
 // This is the entry point for the Lambda function
 exports.handler = async (event) => {
-  // Extract the relevant information from the request body
+  // Extract the relevant information from the requestd body
   const requestBody = JSON.parse(event.body);
   const pdfFile = requestBody.FaxImage; // The PDF file to be sent
   const faxNumber = requestBody.DialNumber; // The phone number to send the fax to
