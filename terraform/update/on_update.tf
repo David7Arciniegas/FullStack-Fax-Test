@@ -20,8 +20,8 @@ provider "aws" {
 resource "aws_lambda_function" "my_lambda_function" {
   function_name = "${var.LAMBDA_NAME}"
   role = "${var.LAMBDA_EXECUTION_ROLE}"
-  filename = "../backend/lambda_function.zip"
-  source_code_hash = filebase64sha256("../backend/lambda_function.zip")
+  filename = "../../backend/lambda_function.zip"
+  source_code_hash = filebase64sha256("../../backend/lambda_function.zip")
   runtime = "nodejs14.x"
   handler = "handler.handler"
   memory_size = 128
