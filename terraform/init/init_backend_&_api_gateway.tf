@@ -73,8 +73,8 @@ resource "aws_iam_role_policy" "api_gateway_lambda_invoke" {
 resource "aws_lambda_function" "my_lambda_function" {
   function_name = "titan_backend"
   role = aws_iam_role.lambda_execution_role.arn
-  filename = "../backend/lambda_function.zip"
-  source_code_hash = filebase64sha256("../backend/lambda_function.zip")
+  filename = "../../backend/lambda_function.zip"
+  source_code_hash = filebase64sha256("../../backend/lambda_function.zip")
   runtime = "nodejs14.x"
   handler = "handler.handler"
   memory_size = 128
