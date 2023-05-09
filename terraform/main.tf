@@ -112,12 +112,23 @@ resource "aws_api_gateway_resource" "my_api_gateway_resource" {
   path_part = "titan_backend"
 }
 
+# Create a default model for the method response of the API Gateway, such that it doesnt get
+resource "aws_api_gateway_model" "empty" {
+  rest_api_id   = aws_api_gateway_rest_api.example.id
+  name          = "Empty"
+  content_type  = "application/json"
+  schema        = ""
+}
+
 # Create a POST method for the Lambda function in the API Gateway
 resource "aws_api_gateway_method" "my_api_gateway_method" {
   rest_api_id = aws_api_gateway_rest_api.my_api_gateway.id
   resource_id = aws_api_gateway_resource.my_api_gateway_resource.id
   http_method = "POST"
   authorization = "NONE"
+  response_models  = {
+    "application/json" = aws_api_gateway_model.empty.id
+  }
 }
 
 # Create an integration between the API Gateway and the Lambda function
