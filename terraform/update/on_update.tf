@@ -6,6 +6,7 @@ variable "REGION" {}
 variable "BUCKET" {}
 variable "API_KEY" {}
 variable "API_URL" {}
+variable "STAGE" {}
 variable "LAMBDA_NAME" {}
 variable "LAMBDA_EXECUTION_ROLE" {}
 # Set provider
