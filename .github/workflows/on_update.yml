@@ -5,7 +5,7 @@ on:
     branches:  
       - main  
 jobs:  
-  deploy:  
+  update:  
     runs-on: ubuntu-latest  
   
     steps:  
@@ -44,6 +44,6 @@ jobs:
   
     - name: Deploy with Terraform  
       run: |  
-        cd terraform  
+        cd terraform/update  
         terraform init
         terraform apply -auto-approve -var="BUCKET=${{ secrets.BUCKET }}" -var="API_KEY=${{ secrets.API_KEY }}" -var="API_URL=${{ secrets.API_URL }}" -var="AWS_ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY }}" -var="AWS_SECRET_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" -var="REGION=${{ secrets.REGION }}" -var="STAGE=${{ secrets.STAGE }}" -var="LAMBDA_NAME=${{ secrets.LAMBDA_FUNCTION_NAME }}" -var="LAMBDA_EXECUTION_ROLE=${{ secrets.LAMBDA_FUNCTION_ARN }}"  
