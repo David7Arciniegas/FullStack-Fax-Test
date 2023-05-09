@@ -166,8 +166,8 @@ output "lambda_function" {
   description = "Name of the Lambda function"
 }
 
-output "lambda_arn" {
-  value = aws_lambda_function.my_lambda_function.arn
-  description = "ARN of the Lambda function"
+output "lambda_role_arn" {
+  value = aws_iam_role.lambda_execution_role.arn
+  description = "ARN of the Lambda execution role"
 }
 
