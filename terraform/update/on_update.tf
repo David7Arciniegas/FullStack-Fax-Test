@@ -36,7 +36,7 @@ resource "aws_lambda_function" "my_lambda_function" {
     } 
   }
   lifecycle {
-    ignore_changes = [arn, last_modified_time]
+    ignore_changes = all
 }
 }
 
