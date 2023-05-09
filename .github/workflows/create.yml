@@ -1,0 +1,49 @@
+name: CI/CD   
+  
+on:  
+  push:  
+    branches:  
+      - main  
+jobs:  
+  deploy:  
+    runs-on: ubuntu-latest  
+  
+    steps:  
+    - name: Checkout repository  
+      uses: actions/checkout@v2  
+  
+    - name: Set up Node.js  
+      uses: actions/setup-node@v2  
+      with:  
+        node-version: 14
+  
+    - name: Create lambda_function.zip  
+      run: |  
+        cd backend/src  
+        zip -r ../lambda_function.zip .  
+        cd ../..  
+  
+    - name: Create axios_lambda.zip  
+      run: |  
+        mkdir axios_layer  
+        cd axios_layer  
+        npm init -y  
+        npm install axios  
+        zip -r ../backend/axios_lambda.zip .  
+        cd ..  
+  
+    - name: Configure AWS credentials  
+      uses: aws-actions/configure-aws-credentials@v1  
+      with:  
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}  
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  
+        aws-region: ${{ secrets.REGION }}
+  
+    - name: Upload axios_lambda.zip to S3  
+      run: aws s3 cp backend/axios_lambda.zip s3://${{ secrets.BUCKET }}/axios_lambda.zip  
+  
+    - name: Deploy with Terraform  
+      run: |  
+        cd terraform/init  
+        terraform init
+        terraform apply -auto-approve -var="BUCKET=${{ secrets.BUCKET }}" -var="API_KEY=${{ secrets.API_KEY }}" -var="API_URL=${{ secrets.API_URL }}" -var="AWS_ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY }}" -var="AWS_SECRET_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" -var="REGION=${{ secrets.REGION }}" -var="STAGE=${{ secrets.STAGE }}" -var="LAMBDA_NAME=${{ secrets.LAMBDA_FUNCTION_NAME }}" -var="LAMBDA_EXECUTION_ROLE=${{ secrets.LAMBDA_FUNCTION_ARN }}"  
