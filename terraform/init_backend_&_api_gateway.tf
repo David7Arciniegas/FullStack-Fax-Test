@@ -160,3 +160,14 @@ output "api_gateway_endpoint_url" {
   value = "https://${aws_api_gateway_rest_api.my_api_gateway.id}.execute-api.${var.REGION}.amazonaws.com/dev/${aws_lambda_function.my_lambda_function.function_name}"
 }
 
+# Return lambdafunction both ARN and name for storing in Secrets
+output "lambda_function" {
+  value = aws_lambda_function.my_lambda_function.function_name
+  description = "Name of the Lambda function"
+}
+
+output "lambda_arn" {
+  value = aws_lambda_function.my_lambda_function.arn
+  description = "ARN of the Lambda function"
+}
+
