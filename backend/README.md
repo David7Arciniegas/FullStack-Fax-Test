@@ -1,4 +1,4 @@
-# NodeJS Backend using Etherfax API  
+# NodeJS Backend using Etherfax API.
   
 This is a NodeJS backend project that uses the Etherfax API to send faxes. It includes the following files and folders:  
   
