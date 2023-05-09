@@ -4,7 +4,7 @@ const Etherfax = require('./etherfax');
 // Create a new instance of the Etherfax class
 const etherfax = new Etherfax();
 
-// This is the entry point for the Lambdad function
+// This is the entry point for the Lambda function
 exports.handler = async (event) => {
   // Extract the relevant information from the request body
   const requestBody = JSON.parse(event.body);
